@@ -1,0 +1,10 @@
+<form action="#" (ngSubmit)="onCreate()">
+  <button
+    [disabled]="!name">
+    Create todo
+  </button>
+  <input
+    type="text"
+    name="name"
+    [(ngModel)]="name">
+</form>

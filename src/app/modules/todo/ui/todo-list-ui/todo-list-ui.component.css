@@ -1,0 +1,21 @@
+.todo {
+  display: flex;
+  justify-content: start;
+}
+
+.todo-element {
+  margin: 0.5rem 0.2rem;
+}
+
+.important {
+  font-weight: bold;
+  color: cornflowerblue;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+span {
+  align-self: center;
+}

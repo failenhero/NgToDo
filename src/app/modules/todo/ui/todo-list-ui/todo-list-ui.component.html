@@ -1,0 +1,20 @@
+<ng-container *ngFor="let todo of todoList | reverseTodo">
+  <div class="todo">
+    <button (click)="onDone(todo.id)" class="todo-element">
+      <mat-icon>done_outline</mat-icon>
+    </button>
+    <button (click)="onDelete(todo.id)" class="todo-element">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <span
+      (click)="onImportant(todo.id)"
+      class="todo-element"
+      [ngClass]="{
+         'important': todo.important,
+         'done': todo.done
+       }">
+      {{todo.name}}
+    </span>
+  </div>
+</ng-container>
+

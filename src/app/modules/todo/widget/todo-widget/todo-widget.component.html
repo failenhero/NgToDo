@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <h1>Todo Widget</h1>
+
+  <app-todo-create-form-ui
+    (create)="onCreate($event)">
+  </app-todo-create-form-ui>
+
+  <app-todo-list-ui
+    [todoList]="todoList$ |async"
+    (delete)="onDelete($event)"
+    (important)="onImportant($event)"
+    (done)="onDone($event)">
+  </app-todo-list-ui>
+</div>
