@@ -1,11 +1,12 @@
 import {Action} from "@ngrx/store";
 
-export type TodoActions = TodoCreateAction | TodoMarkAsImportantAction | TodoMarkAsDoneAction;
+export type TodoActions = TodoCreateAction | TodoMarkAsImportantAction | TodoMarkAsDoneAction | TodoDeleteAction;
 
 export enum todoActionsType {
   CREATE = '[TODO] create todo item',
   MARK_AS_IMPORTANT = '[TODO] mark todo item as important',
-  MARK_AS_DONE = '[TODO] mark todo item as done'
+  MARK_AS_DONE = '[TODO] mark todo item as done',
+  DELETE = '[TODO] delete todo item'
 }
 
 export class TodoCreateAction implements Action {
@@ -30,4 +31,13 @@ export class TodoMarkAsDoneAction implements Action {
   constructor(
     public payload: {id: number}
   ) {}
+}
+
+export class TodoDeleteAction implements Action {
+  readonly type: string = todoActionsType.DELETE
+
+  constructor(
+    public payload: {id: number}
+  ) {
+  }
 }

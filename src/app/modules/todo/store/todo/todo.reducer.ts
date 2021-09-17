@@ -15,7 +15,7 @@ const initialState: TodoState = {
 
 export const todoReducer = (state = initialState, action: TodoActions) => {
   let idx: number;
-  let todoToMark: Todo;
+  let todoToAct: Todo | undefined;
   let arrBeforeChangedTodo: Todo[];
   let arrAfterChangedTodo: Todo[];
 
@@ -37,12 +37,12 @@ export const todoReducer = (state = initialState, action: TodoActions) => {
       };
     case todoActionsType.MARK_AS_IMPORTANT:
       //@ts-ignore
-      todoToMark = state.todoList.find((todo)=> todo.id === action.payload.id);
-      if (!todoToMark) {
+      todoToAct = state.todoList.find((todo)=> todo.id === action.payload.id);
+      if (!todoToAct) {
         return;
       }
-      const newTodoToMarkImportant: Todo = {...todoToMark, important: !todoToMark.important}
-      idx = state.todoList.indexOf(todoToMark);
+      const newTodoToMarkImportant: Todo = {...todoToAct, important: !todoToAct.important}
+      idx = state.todoList.indexOf(todoToAct);
       arrBeforeChangedTodo = state.todoList.slice(0, idx);
       arrAfterChangedTodo = state.todoList.slice(idx+1, state.todoList.length);
       return {
@@ -55,12 +55,12 @@ export const todoReducer = (state = initialState, action: TodoActions) => {
       }
     case todoActionsType.MARK_AS_DONE:
       //@ts-ignore
-      todoToMark = state.todoList.find((todo)=> todo.id === action.payload.id);
-      if (!todoToMark) {
+      todoToAct = state.todoList.find((todo)=> todo.id === action.payload.id);
+      if (!todoToAct) {
         return;
       }
-      const newTodoToMarkDone: Todo = {...todoToMark, done: !todoToMark.done}
-      idx = state.todoList.indexOf(todoToMark);
+      const newTodoToMarkDone: Todo = {...todoToAct, done: !todoToAct.done}
+      idx = state.todoList.indexOf(todoToAct);
       arrBeforeChangedTodo = state.todoList.slice(0, idx);
       arrAfterChangedTodo = state.todoList.slice(idx+1, state.todoList.length);
       return {
@@ -68,6 +68,22 @@ export const todoReducer = (state = initialState, action: TodoActions) => {
         todoList: [
           ...arrBeforeChangedTodo,
           newTodoToMarkDone,
+          ...arrAfterChangedTodo
+        ]
+      }
+    case todoActionsType.DELETE:
+      //@ts-ignore
+      todoToAct = state.todoList.find((todo)=> todo.id === action.payload.id);
+      if (!todoToAct) {
+        return;
+      }
+      idx = state.todoList.indexOf(todoToAct);
+      arrBeforeChangedTodo = state.todoList.slice(0, idx);
+      arrAfterChangedTodo = state.todoList.slice(idx+1, state.todoList.length);
+      return {
+        ...state,
+        todoList: [
+          ...arrBeforeChangedTodo,
           ...arrAfterChangedTodo
         ]
       }
